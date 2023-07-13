@@ -11,6 +11,7 @@ struct ExpenseFormView: View {
     @State private var expense: String = ""
     @State private var category: String = ""
     @State private var notes: String = ""
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack{
@@ -25,48 +26,52 @@ struct ExpenseFormView: View {
                     Spacer()
                     VStack {
                         TextField("", text: $category)
+                            .foregroundColor(.blue)
+                            
                         Rectangle()
                             .frame(height: 1)
                             .foregroundColor(.blue)
-                            .padding(.leading)
                     }
+                    .padding(.leading)
                 }
                 .listRowBackground(Color.black)
                 HStack {
-                    Text("Loss")
+                    Text("Expense ")
                         .foregroundColor(.blue)
                     Spacer()
                     VStack {
                         TextField("", text: $expense)
+                            .foregroundColor(.blue)
                         Rectangle()
                             .frame(height: 1)
                             .foregroundColor(.blue)
-                            .padding(.leading)
                     }
+                    .padding(.leading)
                 }
                 .listRowBackground(Color.black)
                 HStack {
-                    Text("Notes")
+                    Text("Notes     ")
                         .foregroundColor(.blue)
                     Spacer()
                     VStack {
                         TextField("", text: $notes)
+                            .foregroundColor(.blue)
                         Rectangle()
                             .frame(height: 1)
                             .foregroundColor(.blue)
-                            .padding(.leading)
                     }
+                    .padding(.leading)
                 }
                 .listRowBackground(Color.black)
             }
             .scrollContentBackground(.hidden)
             HStack {
                 Spacer()
-                Button("Submit"){
-                    
+                Button("Cancel"){
+                    dismiss()
                 }
                 Spacer()
-                Button("Cancel"){
+                Button("Submit"){
                     
                 }
                 Spacer()

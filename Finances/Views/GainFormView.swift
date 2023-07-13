@@ -11,68 +11,76 @@ struct GainFormView: View {
     @State private var gain: String = ""
     @State private var category: String = ""
     @State private var notes: String = ""
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack{
-            Text("Add Money")
-                .font(.largeTitle)
-                .foregroundColor(.blue)
-            Spacer()
-            Form {
-                HStack {
-                    Text("Category")
-                        .foregroundColor(.blue)
-                    Spacer()
-                    VStack {
-                        TextField("", text: $category)
-                        Rectangle()
-                            .frame(height: 1)
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            VStack{
+                Text("Add Money")
+                    .font(.largeTitle)
+                    .foregroundColor(.blue)
+                Spacer()
+                Form {
+                    HStack {
+                        Text("Category")
                             .foregroundColor(.blue)
-                            .padding(.leading)
+                        Spacer()
+                        VStack {
+                            TextField("", text: $category)
+                                .foregroundColor(.blue)
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.leading)
                     }
-                }
-                .listRowBackground(Color.black)
-                HStack {
-                    Text("Gain")
-                        .foregroundColor(.blue)
-                    Spacer()
-                    VStack {
-                        TextField("", text: $gain)
-                        Rectangle()
-                            .frame(height: 1)
+                    .listRowBackground(Color.black)
+                    HStack {
+                        Text("Gain        ")
                             .foregroundColor(.blue)
-                            .padding(.leading)
+                        Spacer()
+                        VStack {
+                            TextField("", text: $gain)
+                                .foregroundColor(.blue)
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.leading)
                     }
-                }
-                .listRowBackground(Color.black)
-                HStack {
-                    Text("Notes")
-                        .foregroundColor(.blue)
-                    Spacer()
-                    VStack {
-                        TextField("", text: $notes)
-                        Rectangle()
-                            .frame(height: 1)
+                    .listRowBackground(Color.black)
+                    HStack {
+                        Text("Notes     ")
                             .foregroundColor(.blue)
-                            .padding(.leading)
+                        Spacer()
+                        VStack {
+                            TextField("", text: $notes)
+                                .foregroundColor(.blue)
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.blue)
+                        }
+                        .padding(.leading)
                     }
+                    .listRowBackground(Color.black)
                 }
-                .listRowBackground(Color.black)
+                .scrollContentBackground(.hidden)
+                HStack {
+                    Spacer()
+                    Button("Cancel"){
+                        dismiss()
+                    }
+                    Spacer()
+                    Button("Submit"){
+                        
+                    }
+                    Spacer()
+                }
             }
-            .scrollContentBackground(.hidden)
-            HStack {
-                Spacer()
-                Button("Submit"){
-                    
-                }
-                Spacer()
-                Button("Cancel"){
-                    
-                }
-                Spacer()
-            }
+            .background(Color.black)
         }
-        .background(Color.black)
     }
 }
 
