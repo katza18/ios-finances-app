@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct GainFormView: View {
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @State private var gain: String = ""
     @State private var category: String = ""
     @State private var notes: String = ""
-    @Environment(\.dismiss) var dismiss
+    @State private var oldBalance: Double = 0.00
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var balances: FetchedResults<BalanceChange>
+    
     
     var body: some View {
         ZStack {
@@ -65,19 +71,26 @@ struct GainFormView: View {
                         .padding(.leading)
                     }
                     .listRowBackground(Color.black)
+                    HStack {
+                        Spacer()
+                        Button("Cancel"){
+                            dismiss()
+                        }
+                        Spacer()
+                        Button("Submit"){
+                            if (!balances.isEmpty) {
+                                oldBalance = balances[0].newBalance
+                            }
+                            
+                            DataController().addBalance(category: category, oldBalance: oldBalance, change: gain, context: managedObjectContext)
+                            
+                            dismiss()
+                        }
+                        Spacer()
+                    }
+                    .listRowBackground(Color.black)
                 }
                 .scrollContentBackground(.hidden)
-                HStack {
-                    Spacer()
-                    Button("Cancel"){
-                        dismiss()
-                    }
-                    Spacer()
-                    Button("Submit"){
-                        
-                    }
-                    Spacer()
-                }
             }
             .background(Color.black)
         }

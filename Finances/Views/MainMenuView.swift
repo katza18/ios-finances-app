@@ -9,15 +9,11 @@ import SwiftUI
 import Charts
 
 struct MainMenuView: View {
-    var data: [BalanceChanges] = [
-        BalanceChanges(month: 7, balance: 2013.96),
-        BalanceChanges(month: 8, balance: 1983.23),
-        BalanceChanges(month: 9, balance: 2342.44),
-        BalanceChanges(month: 10, balance: 1500.21)
-    ]
-
     @State private var showMinusPopover: Bool = false
     @State private var showAddPopover: Bool = false
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var balances: FetchedResults<BalanceChange>
     
     var body: some View {
         ZStack {
@@ -43,9 +39,16 @@ struct MainMenuView: View {
                     
                     Spacer()
                     
-                    Text("$2000.00")
-                        .font(.system(size: 56))
-                        .foregroundColor(.blue)
+                    if(balances.isEmpty) {
+                        Text("$0.00") // should be balance[0].newBalance
+                            .font(.system(size: 56))
+                            .foregroundColor(.blue)
+                    } else {
+                        Text(String(format: "$%.2f", balances[0].newBalance)) // should be balances[0].newBalance
+                            .font(.system(size: 56))
+                            .foregroundColor(.blue)
+                    }
+                    
                     
                     Spacer()
                     
@@ -64,10 +67,10 @@ struct MainMenuView: View {
                 }
                 .padding()
         
-                Chart(data, id: \.self){
+                Chart(balances, id: \.self){
                     LineMark(
                         x: .value("Month", $0.date),
-                        y: .value("Budget", $0.balance)
+                        y: .value("Budget", $0.newBalance)
                     )
                 }
                     .padding()
@@ -102,27 +105,24 @@ struct MainMenuView: View {
                     .font(.title)
                 
                 List {
-                    HStack {
-                        Text("Groceries")
-                            .foregroundColor(.blue)
-                        Spacer()
-                        Text("-$100")
-                            .foregroundColor(.red)
+                    ForEach(balances) { balance in
+                        HStack {
+                            Text(balance.category)
+                                .foregroundColor(.blue)
+                            Spacer()
+                            if(balance.change.sign == .minus) {
+                                Text(String(format: "%.2f", balance.change))
+                                    .foregroundColor(.red)
+                            } else {
+                                Text(String(format: "%.2f", balance.change))
+                                    .foregroundColor(.green)
+                            }
+                            
+                        }
+                            .listRowBackground(Color.black)
                     }
-                        .listRowBackground(Color.black)
-                    HStack {
-                        Text("Work Pay")
-                            .foregroundColor(.blue)
-                        Spacer()
-                        Text("+$100")
-                            .foregroundColor(.green)
-                    }
-                        .listRowBackground(Color.black)
                 }
                     .scrollContentBackground(.hidden)
-                Button("Monthly Net Income"){
-                    
-                }
                 Spacer()
             }
             .background(Color.black)

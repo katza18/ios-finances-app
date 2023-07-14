@@ -6,16 +6,14 @@
 //
 
 import Foundation
+import CoreData
 
-struct BalanceChanges: Hashable {
-    var date: Date
-    var balance: Double
-    
-    init(month: Int, balance: Double) {
-        let calendar = Calendar.autoupdatingCurrent
-        self.date = calendar.date(from: DateComponents(year: 2023, month: month))!
-        self.balance = balance
-    }
+class BalanceChange: NSManagedObject, Identifiable {
+    @NSManaged var id: UUID
+    @NSManaged var date: Date
+    @NSManaged var newBalance: Double
+    @NSManaged var change: Double // - if loss, + if gain
+    @NSManaged var category: String
     
     //Func: Calculates new balance
     func calculateNewBalance(oldBalance: Double, balanceChange: Double, add: Bool) -> Double {

@@ -7,113 +7,15 @@
 
 import SwiftUI
 import Charts
+import CoreData
 
 struct ContentView: View {
-    
-    
-    var data: [BalanceChanges] = [
-        BalanceChanges(month: 7, balance: 2013.96),
-        BalanceChanges(month: 8, balance: 1983.23),
-        BalanceChanges(month: 9, balance: 2342.44),
-        BalanceChanges(month: 10, balance: 1500.21)
-    ]
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var balance: FetchedResults<BalanceChange>
     
     var body: some View {
-        VStack {
-            Text("Budget")
-                .font(.title)
-                .foregroundColor(.blue)
-            HStack {
-                NavigationLink {
-                    
-                } label: {
-                    Image(systemName: "minus.circle")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.red)
-                        .background(Color.black)
-                }
-                Spacer()
-                Text("$2000.00")
-                    .font(.system(size: 56))
-                    .foregroundColor(.blue)
-                Spacer()
-                NavigationLink {
-                    
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.green)
-                        .background(Color.black)
-                }
-            }
-            .padding()
-    
-            Chart(data, id: \.self){
-                LineMark(
-                    x: .value("Month", $0.date),
-                    y: .value("Budget", $0.balance)
-                )
-            }
-                .padding()
-                .foregroundColor(.blue)
-                .chartXAxis(content: {
-                    AxisMarks{_ in
-                        AxisGridLine(
-                            centered: true
-                        )
-                        .foregroundStyle(Color.blue)
-                        AxisTick()
-                            .foregroundStyle(Color.blue)
-                        AxisValueLabel()
-                            .foregroundStyle(Color.blue)
-                    }
-                })
-                .chartYAxis(content: {
-                    AxisMarks{_ in
-                        AxisGridLine(
-                            centered: true
-                        )
-                        .foregroundStyle(Color.blue)
-                        AxisTick()
-                            .foregroundStyle(Color.blue)
-                        AxisValueLabel()
-                            .foregroundStyle(Color.blue)
-                    }
-                })
-            
-            Text("Recent")
-                .foregroundColor(.blue)
-                .font(.title)
-            
-            List {
-                HStack {
-                    Text("Groceries")
-                        .foregroundColor(.blue)
-                    Spacer()
-                    Text("-$100")
-                        .foregroundColor(.red)
-                }
-                    .listRowBackground(Color.black)
-                HStack {
-                    Text("Work Pay")
-                        .foregroundColor(.blue)
-                    Spacer()
-                    Text("+$100")
-                        .foregroundColor(.green)
-                }
-                    .listRowBackground(Color.black)
-            }
-                .scrollContentBackground(.hidden)
-            Button("Monthly Net Income"){
-                
-            }
-            Spacer()
-        }
-        .background(Color.black)
+        MainMenuView()
     }
-        
 }
 
 struct ContentView_Previews: PreviewProvider {
