@@ -121,6 +121,11 @@ struct MainMenuView: View {
                         }
                             .listRowBackground(Color.black)
                     }
+                    .onDelete {indexSet in
+                        for index in indexSet {
+                            managedObjectContext.delete(balances[index])
+                        }
+                    }
                 }
                     .scrollContentBackground(.hidden)
                 Spacer()

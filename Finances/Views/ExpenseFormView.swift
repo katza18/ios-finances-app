@@ -80,7 +80,7 @@ struct ExpenseFormView: View {
                         }
                         
                         if (expense.first != "-") {
-                            DataController().addBalance(category: category, oldBalance: oldBalance, change: String("-" + "100"), context: managedObjectContext)
+                            DataController().addBalance(category: category, oldBalance: oldBalance, change: String(format: "-" + expense), context: managedObjectContext)
                             
                             dismiss()
                         }
