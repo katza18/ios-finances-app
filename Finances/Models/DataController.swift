@@ -27,6 +27,12 @@ class DataController: ObservableObject {
         }
     }
     
+    func delete(context: NSManagedObjectContext, balanceChange: BalanceChange) {
+        context.delete(balanceChange)
+        
+        try? context.save()
+    }
+    
     func addBalance(category: String, oldBalance: Double, change: String, context: NSManagedObjectContext) {
         let balance = BalanceChange(context: context)
         balance.id = UUID()

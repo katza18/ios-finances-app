@@ -123,7 +123,7 @@ struct MainMenuView: View {
                     }
                     .onDelete {indexSet in
                         for index in indexSet {
-                            managedObjectContext.delete(balances[index])
+                            DataController().delete(context: managedObjectContext, balanceChange: balances[index])
                         }
                     }
                 }
