@@ -14,9 +14,12 @@
 		480270F72A5E1F870013319D /* FinancesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480270F62A5E1F870013319D /* FinancesTests.swift */; };
 		480271012A5E1F870013319D /* FinancesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480271002A5E1F870013319D /* FinancesUITests.swift */; };
 		480271032A5E1F870013319D /* FinancesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480271022A5E1F870013319D /* FinancesUITestsLaunchTests.swift */; };
-		480271102A5E2AA20013319D /* BalanceChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802710F2A5E2AA20013319D /* BalanceChanges.swift */; };
+		480271102A5E2AA20013319D /* BalanceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802710F2A5E2AA20013319D /* BalanceChange.swift */; };
 		488BEF622A5F72550044B662 /* ExpenseFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488BEF612A5F72550044B662 /* ExpenseFormView.swift */; };
 		488BEF642A5F72620044B662 /* GainFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488BEF632A5F72620044B662 /* GainFormView.swift */; };
+		488BEF662A5F9B100044B662 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488BEF652A5F9B100044B662 /* MainMenuView.swift */; };
+		488BEF6A2A5FAB450044B662 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 488BEF682A5FAB450044B662 /* Model.xcdatamodeld */; };
+		488BEF712A5FB5690044B662 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488BEF702A5FB5690044B662 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,9 +50,12 @@
 		480270FC2A5E1F870013319D /* FinancesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinancesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		480271002A5E1F870013319D /* FinancesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancesUITests.swift; sourceTree = "<group>"; };
 		480271022A5E1F870013319D /* FinancesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancesUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		4802710F2A5E2AA20013319D /* BalanceChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceChanges.swift; sourceTree = "<group>"; };
+		4802710F2A5E2AA20013319D /* BalanceChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceChange.swift; sourceTree = "<group>"; };
 		488BEF612A5F72550044B662 /* ExpenseFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFormView.swift; sourceTree = "<group>"; };
 		488BEF632A5F72620044B662 /* GainFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainFormView.swift; sourceTree = "<group>"; };
+		488BEF652A5F9B100044B662 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		488BEF692A5FAB450044B662 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		488BEF702A5FB5690044B662 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +106,12 @@
 		480270E42A5E1F830013319D /* Finances */ = {
 			isa = PBXGroup;
 			children = (
+				488BEF672A5FAB290044B662 /* Models */,
 				488BEF602A5F721D0044B662 /* Views */,
 				480270E72A5E1F830013319D /* ContentView.swift */,
 				480270E52A5E1F830013319D /* FinancesApp.swift */,
 				480270E92A5E1F860013319D /* Assets.xcassets */,
 				480270EB2A5E1F860013319D /* Preview Content */,
-				4802710F2A5E2AA20013319D /* BalanceChanges.swift */,
 			);
 			path = Finances;
 			sourceTree = "<group>";
@@ -140,8 +146,19 @@
 			children = (
 				488BEF612A5F72550044B662 /* ExpenseFormView.swift */,
 				488BEF632A5F72620044B662 /* GainFormView.swift */,
+				488BEF652A5F9B100044B662 /* MainMenuView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		488BEF672A5FAB290044B662 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4802710F2A5E2AA20013319D /* BalanceChange.swift */,
+				488BEF682A5FAB450044B662 /* Model.xcdatamodeld */,
+				488BEF702A5FB5690044B662 /* DataController.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,9 +291,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				488BEF662A5F9B100044B662 /* MainMenuView.swift in Sources */,
 				480270E82A5E1F830013319D /* ContentView.swift in Sources */,
-				480271102A5E2AA20013319D /* BalanceChanges.swift in Sources */,
+				480271102A5E2AA20013319D /* BalanceChange.swift in Sources */,
+				488BEF6A2A5FAB450044B662 /* Model.xcdatamodeld in Sources */,
 				488BEF642A5F72620044B662 /* GainFormView.swift in Sources */,
+				488BEF712A5FB5690044B662 /* DataController.swift in Sources */,
 				480270E62A5E1F830013319D /* FinancesApp.swift in Sources */,
 				488BEF622A5F72550044B662 /* ExpenseFormView.swift in Sources */,
 			);
@@ -422,6 +442,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -437,13 +458,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Finances/Preview Content\"";
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,13 +487,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Finances/Preview Content\"";
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -492,6 +515,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
@@ -511,6 +535,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
@@ -529,6 +554,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.AidanKatz.FinancesUITests;
@@ -546,6 +572,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WQ6BDDFM5B;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.AidanKatz.FinancesUITests;
@@ -597,6 +624,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		488BEF682A5FAB450044B662 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				488BEF692A5FAB450044B662 /* Model.xcdatamodel */,
+			);
+			currentVersion = 488BEF692A5FAB450044B662 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 480270DA2A5E1F830013319D /* Project object */;
 }
