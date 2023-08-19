@@ -17,30 +17,41 @@ struct MonthlySpendingView: View {
             Text("Monthly Spending")
                 .font(.largeTitle)
             List {
-                ForEach(Array(monthlySpending.keys), id: \.self) { month in
+                ForEach(Array(monthlySpending.keys), id: \.self) { date in
                     Section {
-                        HStack {
-                            Text("\(month)")
-                            Spacer()
-                            Text("-$\(String(format: "%.2f", ( -1 * (monthlySpending[month] ?? 0.00))))")
+                        NavigationLink {
+                            MonthlySpendingDetailView(spendingDate: date)
+                        } label: {
+                            HStack {
+                                Text("\(date)")
+                                Spacer()
+                                Text("-$\(String(format: "%.2f", ( -1 * (monthlySpending[date] ?? 0.00))))")
+                            }
                         }
                     }
                 }
             }
         }.onAppear {
-            //Create the months array with the balances.date (formatted)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM yyyy"
+            createMonthlySpending()
+        }
+    }
+    
+    private func createMonthlySpending() {
+        //Reset Monthly Spending
+        monthlySpending = [:]
+        
+        //Create the months array with the balances.date (formatted)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM yyyy"
+        
+        for balance in balances {
+            //Create a set of the (unique) of Strings containing "MM YY" formatted dates in order
+            let newDate = dateFormatter.string(from: balance.date)
             
-            for balance in balances {
-                //Create a set of the (unique) of Strings containing "MM YY" formatted dates in order
-                let newDate = dateFormatter.string(from: balance.date)
-                
-                if (monthlySpending[newDate] != nil && balance.change < 0) {
-                    monthlySpending[newDate]! += balance.change
-                } else if (balance.change < 0) {
-                    monthlySpending[newDate] = balance.change
-                }
+            if (monthlySpending[newDate] != nil && balance.change < 0) {
+                monthlySpending[newDate]! += balance.change
+            } else if (balance.change < 0) {
+                monthlySpending[newDate] = balance.change
             }
         }
     }

@@ -11,6 +11,7 @@ import Charts
 struct MainMenuView: View {
     @State private var showMinusPopover: Bool = false
     @State private var showAddPopover: Bool = false
+    private let dateFormatter = DateFormatter()
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var balances: FetchedResults<BalanceChange>
@@ -92,7 +93,7 @@ struct MainMenuView: View {
                 List {
                     ForEach(balances) { balance in
                         HStack {
-                            Text(balance.category)
+                            Text("\(dateFormatter.string(from: balance.date)) - \(balance.category)")
                             Spacer()
                             if(balance.change.sign == .minus) {
                                 Text(String(format: "%.2f", balance.change))
@@ -118,6 +119,8 @@ struct MainMenuView: View {
                     Text("Expense Reports")
                 }
             }
+        }.onAppear{
+            dateFormatter.dateFormat = "MM/dd"
         }
     }
 }
