@@ -21,8 +21,6 @@ struct GainFormView: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
             VStack{
                 Text("Add Money")
                     .font(.largeTitle)
@@ -42,7 +40,6 @@ struct GainFormView: View {
                         }
                         .padding(.leading)
                     }
-                    .listRowBackground(Color.black)
                     HStack {
                         Text("Gain        ")
                             .foregroundColor(.blue)
@@ -56,7 +53,6 @@ struct GainFormView: View {
                         }
                         .padding(.leading)
                     }
-                    .listRowBackground(Color.black)
                     HStack {
                         Text("Notes     ")
                             .foregroundColor(.blue)
@@ -70,7 +66,6 @@ struct GainFormView: View {
                         }
                         .padding(.leading)
                     }
-                    .listRowBackground(Color.black)
                     HStack {
                         Spacer()
                         Button("Cancel"){
@@ -88,11 +83,9 @@ struct GainFormView: View {
                         }
                         Spacer()
                     }
-                    .listRowBackground(Color.black)
                 }
                 .scrollContentBackground(.hidden)
             }
-            .background(Color.black)
         }
     }
 }

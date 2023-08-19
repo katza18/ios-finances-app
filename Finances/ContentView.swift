@@ -11,10 +11,11 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var balance: FetchedResults<BalanceChange>
     
     var body: some View {
-        MainMenuView()
+        NavigationView {
+            MainMenuView()
+        }
     }
 }
 

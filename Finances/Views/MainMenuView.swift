@@ -17,12 +17,9 @@ struct MainMenuView: View {
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
             VStack {
                 Text("Budget")
                     .font(.title)
-                    .foregroundColor(.blue)
                 HStack {
                     Button {
                         showMinusPopover = true
@@ -31,7 +28,6 @@ struct MainMenuView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .foregroundColor(.red)
-                            .background(Color.black)
                     }
                     .fullScreenCover(isPresented: $showMinusPopover) {
                         ExpenseFormView()
@@ -42,11 +38,9 @@ struct MainMenuView: View {
                     if(balances.isEmpty) {
                         Text("$0.00") // should be balance[0].newBalance
                             .font(.system(size: 56))
-                            .foregroundColor(.blue)
                     } else {
-                        Text(String(format: "$%.2f", balances[0].newBalance)) // should be balances[0].newBalance
+                        Text(String(format: "$%.2f", balances[0].newBalance))
                             .font(.system(size: 56))
-                            .foregroundColor(.blue)
                     }
                     
                     
@@ -59,7 +53,6 @@ struct MainMenuView: View {
                             .resizable()
                             .frame(width: 24, height: 24)
                             .foregroundColor(.green)
-                            .background(Color.black)
                     }
                     .fullScreenCover(isPresented: $showAddPopover) {
                         GainFormView()
@@ -74,17 +67,13 @@ struct MainMenuView: View {
                     )
                 }
                     .padding()
-                    .foregroundColor(.blue)
                     .chartXAxis(content: {
                         AxisMarks{_ in
                             AxisGridLine(
                                 centered: true
                             )
-                            .foregroundStyle(Color.blue)
                             AxisTick()
-                                .foregroundStyle(Color.blue)
                             AxisValueLabel()
-                                .foregroundStyle(Color.blue)
                         }
                     })
                     .chartYAxis(content: {
@@ -92,23 +81,18 @@ struct MainMenuView: View {
                             AxisGridLine(
                                 centered: true
                             )
-                            .foregroundStyle(Color.blue)
                             AxisTick()
-                                .foregroundStyle(Color.blue)
                             AxisValueLabel()
-                                .foregroundStyle(Color.blue)
                         }
                     })
                 
                 Text("Recent")
-                    .foregroundColor(.blue)
                     .font(.title)
                 
                 List {
                     ForEach(balances) { balance in
                         HStack {
                             Text(balance.category)
-                                .foregroundColor(.blue)
                             Spacer()
                             if(balance.change.sign == .minus) {
                                 Text(String(format: "%.2f", balance.change))
@@ -119,7 +103,6 @@ struct MainMenuView: View {
                             }
                             
                         }
-                            .listRowBackground(Color.black)
                     }
                     .onDelete {indexSet in
                         for index in indexSet {
@@ -129,8 +112,12 @@ struct MainMenuView: View {
                 }
                     .scrollContentBackground(.hidden)
                 Spacer()
+                NavigationLink {
+                    MonthlySpendingView()
+                } label: {
+                    Text("Expense Reports")
+                }
             }
-            .background(Color.black)
         }
     }
 }

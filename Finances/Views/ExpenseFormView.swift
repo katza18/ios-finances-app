@@ -39,7 +39,6 @@ struct ExpenseFormView: View {
                     }
                     .padding(.leading)
                 }
-                .listRowBackground(Color.black)
                 HStack {
                     Text("Expense ")
                         .foregroundColor(.blue)
@@ -53,7 +52,6 @@ struct ExpenseFormView: View {
                     }
                     .padding(.leading)
                 }
-                .listRowBackground(Color.black)
                 HStack {
                     Text("Notes     ")
                         .foregroundColor(.blue)
@@ -67,7 +65,6 @@ struct ExpenseFormView: View {
                     }
                     .padding(.leading)
                 }
-                .listRowBackground(Color.black)
                 HStack {
                     Spacer()
                     Button("Cancel"){
@@ -87,12 +84,9 @@ struct ExpenseFormView: View {
                     }
                     Spacer()
                 }
-                .listRowBackground(Color.black)
             }
             .scrollContentBackground(.hidden)
-            
         }
-        .background(Color.black)
     }
 }
 
