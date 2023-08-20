@@ -8,17 +8,18 @@
 import SwiftUI
 import CoreData
 
-struct MonthlySpendingDetailView: View {
+struct MonthlyReportDetailView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State var spendingDate: String
+    @State var reportType: String //ex = expense, gi = gross income, ni = net income
+    @State var reportDate: String
     @State private var categoryMap: [String: Double] = [:]
-    @State private var totalExpenses: Double = 0.00
+    @State private var totals: Double = 0.00
     
     var body: some View {
         VStack {
-            Text("\(spendingDate) Expenses")
+            Text("\(reportDate) \(reportType)")
                 .font(.largeTitle)
-            Text("$\(String(format: "%.2f", totalExpenses))")
+            Text("$\(String(format: "%.2f", totals))")
             List {
                 Section {
                     ForEach(Array(categoryMap.keys), id: \.self) { category in
@@ -60,21 +61,37 @@ struct MonthlySpendingDetailView: View {
         let fetchRequest: NSFetchRequest<BalanceChange> = BalanceChange.fetchRequest() as! NSFetchRequest<BalanceChange>
 
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \BalanceChange.category, ascending: false)]
-        fetchRequest.predicate = NSPredicate(format: "date >= %@ AND date < %@", argumentArray: [makeDate(spendingDate, true), makeDate(spendingDate, false)])
+        fetchRequest.predicate = NSPredicate(format: "date >= %@ AND date < %@", argumentArray: [makeDate(reportDate, true), makeDate(reportDate, false)])
         
         do {
             let balances = try managedObjectContext.fetch(fetchRequest)
             //Create the category map
             for balance in balances {
-                if balance.change < 0 {
-                    totalExpenses += balance.change
+                if (reportType == "Expenses" && balance.change < 0) {
+                    totals += balance.change
                     
                     if (categoryMap[balance.category] != nil) {
                         categoryMap[balance.category]! += balance.change
                     } else {
                         categoryMap[balance.category] = balance.change
                     }
+                } else if (reportType == "Gross Income" && balance.change > 0) {
+                    totals += balance.change
+                    
+                    if (categoryMap[balance.category] != nil) {
+                        categoryMap[balance.category]! += balance.change
+                    } else {
+                        categoryMap[balance.category] = balance.change
+                    }
+                } else if (reportType == "Net Income") {
+                    totals += balance.change
+                    if (categoryMap[balance.category] != nil) {
+                        categoryMap[balance.category]! += balance.change
+                    } else {
+                        categoryMap[balance.category] = balance.change
+                    }
                 }
+                
             }
         } catch {
             print("Error fetching balances: \(error)")
@@ -82,8 +99,8 @@ struct MonthlySpendingDetailView: View {
     }
 }
 
-struct MonthlySpendingDetailView_Previews: PreviewProvider {
+struct MonthlyReportDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MonthlySpendingDetailView(spendingDate: "Aug 2023")
+        MonthlyReportDetailView(reportType: "Expenses", reportDate: "Aug 2023")
     }
 }

@@ -114,9 +114,19 @@ struct MainMenuView: View {
                     .scrollContentBackground(.hidden)
                 Spacer()
                 NavigationLink {
-                    MonthlySpendingView()
+                    MonthlyReportView(reportType: "Expenses")
                 } label: {
                     Text("Expense Reports")
+                }
+                NavigationLink {
+                    MonthlyReportView(reportType: "Gross Income")
+                } label: {
+                    Text("Gross Income Reports")
+                }
+                NavigationLink {
+                    MonthlyReportView(reportType: "Net Income")
+                } label: {
+                    Text("Net Income Reports")
                 }
             }
         }.onAppear{
